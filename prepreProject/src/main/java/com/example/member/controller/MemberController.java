@@ -5,18 +5,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/v12/members")
 @RestController
 public class MemberController {
 
     @PostMapping
-    public ResponseEntity postMember(MemberDto.Post memberDto){
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post memberDto){
         return new ResponseEntity(memberDto, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id")
-                                      MemberDto.Patch memberDto){
+    public ResponseEntity patchMember(@Valid @PathVariable("member-id")
+                                     @RequestBody MemberDto.Patch memberDto){
         return new ResponseEntity(memberDto, HttpStatus.OK);
     }
 

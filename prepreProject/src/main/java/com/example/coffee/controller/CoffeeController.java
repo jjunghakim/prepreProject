@@ -5,18 +5,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v12/coffees")
 public class CoffeeController {
 
     @PostMapping
-    public ResponseEntity postCoffee(@RequestBody CoffeeDto.Post coffeeDto){
+    public ResponseEntity postCoffee(@Valid @RequestBody CoffeeDto.Post coffeeDto){
         return new ResponseEntity<>(coffeeDto, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{coffee-id}")
     public ResponseEntity patchCoffee(@PathVariable("coffee-id")
-                                      @RequestBody CoffeeDto.Patch coffeeDto){
+                                      @Valid @RequestBody CoffeeDto.Patch coffeeDto){
         return new ResponseEntity<>(coffeeDto, HttpStatus.OK);
     }
 

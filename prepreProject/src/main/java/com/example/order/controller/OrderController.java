@@ -5,16 +5,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v12/orders")
 public class OrderController {
     @PostMapping
-    public ResponseEntity postOrder(OrderDto.Post orderDto){
+    public ResponseEntity postOrder(@Valid @RequestBody OrderDto.Post orderDto){
         return new ResponseEntity<>(orderDto, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{order-id}")
-    public ResponseEntity patchOrder(@PathVariable("order-id") OrderDto.Patch orderDto){
+    public ResponseEntity patchOrder(@Valid @PathVariable("order-id") @RequestBody OrderDto.Patch orderDto){
         return new ResponseEntity<>(orderDto, HttpStatus.OK);
     }
 
