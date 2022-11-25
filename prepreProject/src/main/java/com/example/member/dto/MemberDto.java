@@ -1,5 +1,6 @@
 package com.example.member.dto;
 
+import com.example.stamp.Stamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -35,5 +36,19 @@ public class MemberDto {
                 message = "휴대폰 번호는 010으로 시작하는 11자리 숫자와 '-'로 구성되어야 합니다.")
         private String phone;
 //        private Member.MemberStatus memberStatus
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Response{
+        private long memberId;
+        private String email;
+        private String name;
+        private String phone;
+
+        //private Member.MemberStatus memberStatus;
+
+        //private Stamp stamp;
+
     }
 }
