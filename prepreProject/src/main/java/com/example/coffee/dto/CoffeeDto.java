@@ -13,6 +13,7 @@ public class CoffeeDto {
     @Getter
     @AllArgsConstructor
     public static class Post{
+
         @NotBlank
         private String korName;
 
@@ -42,12 +43,16 @@ public class CoffeeDto {
         @Pattern(regexp = "^([A-Za-z])(\\s?[A-Za-z])*$", message = "커피명(영문)은 영문이어야 합니다. 예) Cafe Latte")
         private String engName;
 
-        private Optional<@Range(min= 100, max= 50000) Integer> price = Optional.empty();
-
+        private int price;
 //        private Coffee.CoffeeStatus coffeeStatus;
     }
 
-
-
-
+    @Getter
+    @AllArgsConstructor
+    public static class Response{
+        private long coffeeId;
+        private String korName;
+        private String engName;
+        private int price;
+    }
 }

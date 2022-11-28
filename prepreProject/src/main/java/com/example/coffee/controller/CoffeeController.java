@@ -32,7 +32,7 @@ public class CoffeeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{coffee-id}")
+    @DeleteMapping("/{coffee-id}")
     public ResponseEntity deleteCoffee(@PathVariable("coffee-id") long coffeeId){
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

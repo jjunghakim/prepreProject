@@ -1,9 +1,11 @@
 package com.example.order.service;
 
 import com.example.order.entity.Order;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderService {
     public Order createOrder(Order order){
         return null;
