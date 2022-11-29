@@ -1,6 +1,7 @@
 package com.example.order.controller;
 
 import com.example.order.dto.OrderDto;
+import com.example.order.entity.Order;
 import com.example.order.mapper.OrderMapper;
 import com.example.order.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/v12/orders")
@@ -23,17 +25,27 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity postOrder(@Valid @RequestBody OrderDto.Post orderDto){
-        return new ResponseEntity<>(orderDto, HttpStatus.CREATED);
+        Order order = mapper.orderPostDtoToOrder(orderDto);
+        Order response = orderService.createOrder(order);
+
+        return new ResponseEntity<>(mapper.orderToOrderResponseDto(response), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{order-id}")
-    public ResponseEntity patchOrder(@Valid @PathVariable("order-id") @RequestBody OrderDto.Patch orderDto){
-        return new ResponseEntity<>(orderDto, HttpStatus.OK);
+    public ResponseEntity patchOrder(@Valid @PathVariable("order-id") @Positive long orderId,
+                                     @RequestBody OrderDto.Patch orderDto){
+
+        Order response = orderService.updateOrder(mapper.orderPatchDtoToOrder(orderDto));
+
+        return new ResponseEntity<>(mapper.orderToOrderResponseDto(response), HttpStatus.OK);
     }
 
     @GetMapping("/{order-id}")
-    public ResponseEntity getOrder(@PathVariable("order-id") long orderId){
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity getOrder(@PathVariable("order-id") @Positive long orderId){
+
+        Order order = orderService.findOrder(orderId);
+
+        return new ResponseEntity<>(mapper.orderToOrderResponseDto(order), HttpStatus.OK);
     }
 
     @GetMapping

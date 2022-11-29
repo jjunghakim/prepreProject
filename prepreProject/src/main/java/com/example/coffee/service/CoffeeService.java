@@ -1,15 +1,17 @@
 package com.example.coffee.service;
 
 import com.example.coffee.entity.Coffee;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CoffeeService {
     public Coffee createCoffee(Coffee coffee){
         return null;
     }
 
-    public Coffee updateCoffee(long coffeeId){
+    public Coffee updateCoffee(Coffee coffee){
         return null;
     }
 

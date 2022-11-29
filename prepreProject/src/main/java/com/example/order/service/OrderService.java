@@ -11,7 +11,7 @@ public class OrderService {
         return null;
     }
 
-    public Order updateOrder(long orderId){
+    public Order updateOrder(Order order){
         return null;
     }
 

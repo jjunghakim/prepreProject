@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
     Member memberPostDtoToMember(MemberDto.Post memberPostDto);
-    Member memberPachDtoToMember(MemberDto.Patch memberPatchDto);
+    Member memberPatchDtoToMember(MemberDto.Patch memberPatchDto);
     MemberDto.Response memberToMemberResponseDto(Member member);
 }
