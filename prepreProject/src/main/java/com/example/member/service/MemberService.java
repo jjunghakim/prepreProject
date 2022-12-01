@@ -1,5 +1,7 @@
 package com.example.member.service;
 
+import com.example.exception.BusinessLogicException;
+import com.example.exception.ExceptionCode;
 import com.example.member.entity.Member;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,8 @@ public class MemberService {
     }
 
     public Member findMember(long memberId){
-        return null;
+
+        throw new BusinessLogicException(ExceptionCode.MEMBER_NOTFOUND);
     }
 
     public List<Member> findMembers(){
