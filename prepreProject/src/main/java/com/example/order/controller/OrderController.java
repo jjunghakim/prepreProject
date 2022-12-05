@@ -31,15 +31,6 @@ public class OrderController {
         return new ResponseEntity<>(mapper.orderToOrderResponseDto(response), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{order-id}")
-    public ResponseEntity patchOrder(@Valid @PathVariable("order-id") @Positive long orderId,
-                                     @RequestBody OrderDto.Patch orderDto){
-
-        Order response = orderService.updateOrder(mapper.orderPatchDtoToOrder(orderDto));
-
-        return new ResponseEntity<>(mapper.orderToOrderResponseDto(response), HttpStatus.OK);
-    }
-
     @GetMapping("/{order-id}")
     public ResponseEntity getOrder(@PathVariable("order-id") @Positive long orderId){
 
