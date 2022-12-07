@@ -46,6 +46,8 @@ public class MemberService {
         memberRepository.delete(findMember);
     }
 
+    //예외 발생의 목적을 잘 따질 것
+    //등록된 회원 찾기 메서드 (post != find)
     public Member findVerifiedMember(long memberId){
         Optional<Member> optionalMember =
                 memberRepository.findById(memberId);
@@ -55,6 +57,11 @@ public class MemberService {
         return findMember;
     }
 
+    // ↕ : findVerifiedMember는 멤버가 없을시 MEMBER_NOTFOUND
+    // verifyExistsEmail 는 해당하는 멤버가 이미 있는 경우 MEMBER_EXISTS
+
+    //이메일 검증 메서드
+    //이미 등록된 이메일이라면 BusinessLogic Exception
     public void verifyExistsEmail(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
         if(member.isPresent())

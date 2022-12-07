@@ -1,5 +1,6 @@
 package com.example.order.entity;
 
+import com.example.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,15 @@ public class Order {
 
     @Column(nullable = false, name = "LAST_MODIFIED_AT")
     private LocalDateTime modifiedAt = LocalDateTime.now();
+
+    // 다대일 매핑
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID") //외래키에 해당하는 컬럼명
+    private Member member;
+
+    public void addMember(Member member){
+        this.member = member;
+    }
 
     public enum OrderStatus{
         ORDER_REQUEST(1, "주문 요청"),

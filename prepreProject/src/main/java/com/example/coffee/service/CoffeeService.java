@@ -22,6 +22,7 @@ public class CoffeeService {
     public Coffee createCoffee(Coffee coffee){
         String coffeeCode = coffee.getCoffeeCode().toUpperCase();
 
+        //중복되는 커피 등록하지 않도록
         verifyExistCoffee(coffeeCode);
         coffee.setCoffeeCode(coffeeCode);
 
@@ -69,6 +70,13 @@ public class CoffeeService {
         return findCoffee;
     }
 
+    // ↕ : findVerifiedCoffee : 내가 찾는 커피 id가 원래 있는 커피가 맞는지
+    // 없는 커피라면 exception 던져짐
+
+    // verifyExistCoffee : create 시에 이미 있는 이메일인지에 대해 검증하기 위해
+    // 이미 있는 이메일 (등록된) 것 이라면 exception 던져짐
+
+
     public void verifyExistCoffee(String coffeeCode){
         Optional<Coffee> coffee = coffeeRepository.findByCoffeeCode(coffeeCode);
         if(coffee.isPresent())
@@ -76,7 +84,7 @@ public class CoffeeService {
     }
 
     private Coffee findVerifiedCoffeeByQuery(long coffeeId){
-        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffee(coffeeId);
+        Optional<Coffee> optionalCoffee = coffeeRepository.findByCoffeeId(coffeeId);
         Coffee findCoffee =
                 optionalCoffee.orElseThrow(() ->
                         new BusinessLogicException(ExceptionCode.COFFEE_NOT_FOUND));
