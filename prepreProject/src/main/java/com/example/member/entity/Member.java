@@ -40,6 +40,10 @@ public class Member {
     @Transient
     private String age;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(length = 20, nullable = false)
+    private MemberStatus memberStatus = MemberStatus.MEMBER_ACTIVE;
+
     //일대다 매핑
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
@@ -56,6 +60,19 @@ public class Member {
 
     public void addOrder(Order order){
         orders.add(order);
+    }
+
+    public enum MemberStatus{
+        MEMBER_ACTIVE("활동중"),
+        MEMBER_SLEEP("휴면 상태"),
+        MEMBER_QUIT("탈퇴 상태");
+
+        @Getter
+        private String status;
+
+        MemberStatus(String status){
+            this.status = status;
+        }
     }
 }
 
