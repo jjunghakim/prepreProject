@@ -39,6 +39,9 @@ public class CoffeeService {
         Optional.ofNullable(coffee.getPrice())
                 .ifPresent(price -> findCoffee.setPrice(price));
 
+        Optional.ofNullable(coffee.getCoffeeStatus())
+                .ifPresent(coffeeStatus -> findCoffee.setCoffeeStatus(coffeeStatus));
+
         return coffeeRepository.save(findCoffee);
     }
 

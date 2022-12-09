@@ -6,15 +6,21 @@ import com.example.member.entity.Member;
 import com.example.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MemberService {
     private MemberRepository memberRepository;
+
+    //Repository DI
     private MemberService(MemberRepository memberRepository){
         this.memberRepository = memberRepository;
     }
+
+    //멤버 생성
+    // (리포지터리에 저장하는 기본적 crud 코드들은 JpaRepository 를 extend 해서 안적어준것)
 
     public Member createMember(Member member){
         verifyExistsEmail(member.getEmail());
@@ -29,7 +35,11 @@ public class MemberService {
                 .ifPresent(name -> findMember.setName(name));
         Optional.ofNullable(member.getPhone())
                 .ifPresent(phone -> findMember.setPhone(phone));
+        Optional.ofNullable(member.getMemberStatus())
+                .ifPresent(memberStatus -> findMember.setMemberStatus(memberStatus));
 
+        //update 했을 경우 수정 시간이 들어가므로 setModifiedAt 해줌
+        findMember.setModifiedAt(LocalDateTime.now());
         return memberRepository.save(findMember);
     }
 

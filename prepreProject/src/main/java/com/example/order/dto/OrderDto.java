@@ -19,6 +19,7 @@ public class OrderDto {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     public static class Patch{
         private long orderId;
